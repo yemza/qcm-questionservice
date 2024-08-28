@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: questionservice
+  config:
+    import: "optional:configserver:http://localhost:8888/"
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      questionservice:
+        sliding-window-size: 10
+        failure-rate-threshold: 50
+        wait-duration-in-open-state: 30000
+        automatic-transition-from-open-to-half-open-enabled: true
+        permitted-number-of-calls-in-half-open-state: 2
+        allow-health-indicator-to-fail: true
+        register-health-indicator: true
+
+management:
+  health:
+    circuitbreakers:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: always
+
+
