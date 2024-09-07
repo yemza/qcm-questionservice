@@ -2,7 +2,8 @@ spring:
   application:
     name: questionservice
   config:
-    import: "optional:configserver:https://qcm-configserver.onrender.com/"
+    import: "optional:configserver:https://qcm-configserver.onrender.com"
+    label: main
 
 resilience4j:
   circuitbreaker:
